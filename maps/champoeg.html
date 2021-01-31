@@ -14,6 +14,9 @@
 
 	<link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
 	<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+	
+	<script src='https://cdn.jsdelivr.net/gh/anthonyblackham/champoeg-history@main/data/ChampoegStateParkBoundaries.js'></script>
+	
 
 	<style>
 		html, body {
@@ -64,7 +67,18 @@ var champoeg1852Plat = L.imageOverlay(platimageUrl, platimageBounds);
 //	"2019 Aerial Imagery": marionImagery
 //};
 
+var stateParkStyle = {
+    "color": "#00FF00",
+    "weight": 5,
+    "opacity": 0.65
+};
+
+var statePark = L.geoJSON(ChampoegStateParkBoundaries, {
+    style: stateParkStyle
+});
+
 var overlayMaps = {
+	"Champoeg State Park Boundaries" : statePark,
 	'Champoeg 1852 Plat <div id="slidecontainer"></div><div id="slide"><input id="slide" type="range" min="0" max="1" step="0.1" value="0.5" onchange="update1852Opacity(this.value)"</div>': champoeg1852Plat,
     'Champoeg Town Plats <div id="slidecontainer"></div><div id="slide"><input id="slide" type="range" min="0" max="1" step="0.1" value="0.5" onchange="updateOpacity(this.value)"</div>': champoegPlats,
 	"2019 Aerial Imagery": marionImagery
