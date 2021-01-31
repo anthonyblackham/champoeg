@@ -24,6 +24,19 @@
 			width: 100%;
 			height: 100%;
 		}
+        #slidecontainer {
+          position: absolute;
+          top: 150px;
+          right: 10px;
+          z-index: 1000;
+        }
+
+        #slide {
+          font-size:62.5%;
+          margin: 7px;
+          height: 14px;
+          width: 200px;
+        }
 
 }
 	</style>
@@ -49,19 +62,33 @@ var champoegPlats = L.imageOverlay(imageUrl, imageBounds);
 //};
 
 var overlayMaps = {
-    "Champoeg Plats": champoegPlats,
+    'Champoeg Plats <div id="slidecontainer"></div><div id="slide"><input id="slide" type="range" min="0" max="1" step="0.1" value="0.5" onchange="updateOpacity(this.value)"</div>': champoegPlats,
 	"2019 Aerial Imagery": marionImagery
 };
 
+function updateOpacity(value) {
+    champoegPlats.setOpacity(value);
+}
+
 var map = L.map('map', {
 		center: new L.latLng(45.2536054, -122.898879),
-		zoom: 16,
+		zoom: 15,
 		layers: [marionImagery, champoegPlats]
 });
 
 L.control.layers(null, overlayMaps).addTo(map);
 
 map.addControl(new L.Control.Fullscreen());
+
+//Basemap Slider Div Controls
+
+var div = L.DomUtil.get('slide');
+if (!L.Browser.touch) {
+    L.DomEvent.disableClickPropagation(div);
+    L.DomEvent.on(div, 'mousewheel', L.DomEvent.stopPropagation);
+} else {
+    L.DomEvent.on(div, 'click', L.DomEvent.stopPropagation);
+}
 
 </script>
 
