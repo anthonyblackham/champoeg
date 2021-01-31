@@ -49,25 +49,33 @@
 
 <script>
 
-
 var marionImagery = new L.tileLayer('https://svc.pictometry.com/Image/22A82E1A-145B-9293-7FFE-E586574E7BC2/wmts/PICT-ORMARI19-ErJwPdJ0Uj/default/GoogleMapsCompatible/{z}/{x}/{y}.png');
 
 var imageUrl = 'https://raw.githubusercontent.com/anthonyblackham/champoeg-history/main/data/ChampoegPlats.png',
 	imageBounds = [[45.24934428399687,-122.90573649234403],[45.257866650450275,-122.89202242853435]];
 
+var platimageUrl = 'https://raw.githubusercontent.com/anthonyblackham/champoeg-history/main/data/1852GLOPlat.jpg',
+	platimageBounds = [[45.23542994609452,-122.91293672504924],[45.26024399232741,-122.86713627311012]];
+
 var champoegPlats = L.imageOverlay(imageUrl, imageBounds);
+var champoeg1852Plat = L.imageOverlay(platimageUrl, platimageBounds);
 
 //var baseMaps = {
 //	"2019 Aerial Imagery": marionImagery
 //};
 
 var overlayMaps = {
-    'Champoeg Plats <div id="slidecontainer"></div><div id="slide"><input id="slide" type="range" min="0" max="1" step="0.1" value="0.5" onchange="updateOpacity(this.value)"</div>': champoegPlats,
+	'Champoeg 1852 Plat <div id="slidecontainer"></div><div id="slide"><input id="slide" type="range" min="0" max="1" step="0.1" value="0.5" onchange="update1852Opacity(this.value)"</div>': champoeg1852Plat,
+    'Champoeg Town Plats <div id="slidecontainer"></div><div id="slide"><input id="slide" type="range" min="0" max="1" step="0.1" value="0.5" onchange="updateOpacity(this.value)"</div>': champoegPlats,
 	"2019 Aerial Imagery": marionImagery
 };
 
 function updateOpacity(value) {
     champoegPlats.setOpacity(value);
+}
+
+function update1852Opacity(value) {
+    champoeg1852Plat.setOpacity(value);
 }
 
 var map = L.map('map', {
