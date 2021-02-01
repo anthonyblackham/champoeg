@@ -17,7 +17,7 @@
 	
 	<script src='https://cdn.jsdelivr.net/gh/anthonyblackham/champoeg-history@main/data/ChampoegStateParkBoundaries.js'></script>
 	<script src='https://cdn.jsdelivr.net/gh/anthonyblackham/champoeg-history@main/data/ChampoegDLC.js'></script>
-	
+	<script src='https://cdn.jsdelivr.net/gh/anthonyblackham/champoeg-history@main/data/ChampoegStreetCorners.js'></script>
 
 	<style>
 		html, body {
@@ -93,7 +93,44 @@ var DLC = L.geoJSON(ChampoegDLC, {
   }
 });
 
+var streetCorner = L.geoJSON(ChampoegStreetCorners, {
+    style: function(feature) {
+        return {
+        	fillColor: "red",
+			color: "black"
+        };
+    },
+	pointToLayer: function(feature, latlng) {
+		return new L.CircleMarker(latlng, {
+			radius: 4 , 
+			fillOpacity: 0.85,
+			weight: 2
+		});
+    },
+	onEachFeature: function (feature, layer) {
+		layer.bindPopup(feature.properties.StreetName);
+    }
+});
+
+//geojsonLayer = L.geoJson(geojson, {
+//    style: function(feature) {
+//        return {
+//        	color: "green"
+//        };
+//    },
+//    pointToLayer: function(feature, latlng) {
+//        return new L.CircleMarker(latlng, {
+//        	radius: 10, 
+//        	fillOpacity: 0.85
+//        });
+//    },
+//    onEachFeature: function (feature, layer) {
+//        layer.bindPopup(feature.properties.NAME);
+//    }
+//});
+
 var overlayMaps = {
+	"Surveyed Street Corners" : streetCorner,
 	"Donation Land Claim" : DLC,
 	"Champoeg State Park Boundaries" : statePark,
 	'Champoeg 1852 Plat <div id="slidecontainer"></div><div id="slide"><input id="slide" type="range" min="0" max="1" step="0.1" value="0.5" onchange="update1852Opacity(this.value)"</div>': champoeg1852Plat,
