@@ -17,8 +17,10 @@
 	
 	<script src='https://cdn.jsdelivr.net/gh/anthonyblackham/champoeg-history@main/data/ChampoegStateParkBoundaries.js'></script>
 	<script src='https://cdn.jsdelivr.net/gh/anthonyblackham/champoeg-history@main/data/ChampoegDLC.js'></script>
-	<script src='https://cdn.jsdelivr.net/gh/anthonyblackham/champoeg-history@main/data/ChampoegStreetCorners.js'></script>
+	<script src='https://cdn.jsdelivr.net/gh/anthonyblackham/champoeg-history@main/data/Monuments.js'></script>
 	<script src='https://cdn.jsdelivr.net/gh/anthonyblackham/champoeg-history@main/data/ChampoegTownsite.js'></script>
+	<script src='https://cdn.jsdelivr.net/gh/anthonyblackham/champoeg-history@main/data/Artifacts.js'></script>
+	<script src='https://cdn.jsdelivr.net/gh/anthonyblackham/champoeg-history@main/data/Archaeology.js'></script>
 
 	<style>
 		html, body {
@@ -91,6 +93,22 @@ var townsiteStyle = {
     fillOpacity: .5
 };
 
+var artifactStyle = {
+	fillColor: 'red',
+    weight: 1,
+    opacity: 1,
+    color: 'black',  //Outline color
+    fillOpacity: .5
+};
+
+var archaeologyStyle = {
+	fillColor: 'orange',
+    weight: 1,
+    opacity: 1,
+    color: 'black',  //Outline color
+    fillOpacity: .5
+};
+
 var statePark = L.geoJSON(ChampoegStateParkBoundaries, {
     style: stateParkStyle
 });
@@ -109,7 +127,15 @@ var townsite = L.geoJSON(ChampoegTownsite, {
   }
 });
 
-var streetCorner = L.geoJSON(ChampoegStreetCorners, {
+var artifacts = L.geoJSON(Artifacts, {
+    style: artifactStyle
+});
+
+var archaeology = L.geoJSON(Archaeology, {
+    style: archaeologyStyle
+});
+
+var monuments = L.geoJSON(Monuments, {
     style: function(feature) {
         return {
         	fillColor: "red",
@@ -128,25 +154,10 @@ var streetCorner = L.geoJSON(ChampoegStreetCorners, {
     }
 });
 
-//geojsonLayer = L.geoJson(geojson, {
-//    style: function(feature) {
-//        return {
-//        	color: "green"
-//        };
-//    },
-//    pointToLayer: function(feature, latlng) {
-//        return new L.CircleMarker(latlng, {
-//        	radius: 10, 
-//        	fillOpacity: 0.85
-//        });
-//    },
-//    onEachFeature: function (feature, layer) {
-//        layer.bindPopup(feature.properties.NAME);
-//    }
-//});
-
 var overlayMaps = {
-	"Surveyed Street Corners" : streetCorner,
+	"Archaeology Excavations" : archaeology,
+	"Artifact Concentrations" : artifacts,
+	"Monuments" : monuments,
 	"Townsite" : townsite,
 	"Donation Land Claim" : DLC,
 	"Champoeg State Park Boundaries" : statePark,
