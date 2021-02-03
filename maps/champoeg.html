@@ -64,7 +64,7 @@ var imageUrl = 'https://raw.githubusercontent.com/anthonyblackham/champoeg-histo
 var platimageUrl = 'https://raw.githubusercontent.com/anthonyblackham/champoeg-history/main/data/1852GLOPlat.jpg',
 	platimageBounds = [[45.23542994609452,-122.91293672504924],[45.26024399232741,-122.86713627311012]];
 
-var champoegPlats = L.imageOverlay(imageUrl, imageBounds);
+var champoegPlats = L.imageOverlay(imageUrl, imageBounds, {opacity: .5});
 var champoeg1852Plat = L.imageOverlay(platimageUrl, platimageBounds);
 
 //var baseMaps = {
