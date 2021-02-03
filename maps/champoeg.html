@@ -132,7 +132,10 @@ var artifacts = L.geoJSON(Artifacts, {
 });
 
 var archaeology = L.geoJSON(Archaeology, {
-    style: archaeologyStyle
+    style: archaeologyStyle,
+	onEachFeature: function (feature, layer) {
+    layer.bindPopup('Block: '+feature.properties.Block+'<br>Lot: '+feature.properties.Lot+'<br>Archaeologist: '+feature.properties.Archaeologist+'<br>Comments: '+feature.properties.Comments+'<br>Year: '+feature.properties.Year+'<br>Type: '+feature.properties.Type);
+  }
 });
 
 var monuments = L.geoJSON(Monuments, {
